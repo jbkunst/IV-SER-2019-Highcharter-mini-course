@@ -54,7 +54,7 @@ create_hc <- function(t = "line") {
   is_polar <- str_detect(t, "polar")
   t <- str_replace(t, "polar", "")
   
-  if(!t %in% dont_rm_high_and_low) {
+  if(!t %in% keep_rm_high_and_low) {
     df1 <- df1 %>% select(-e, -low, -high)
     df2 <- df2 %>% select(-e, -low, -high)
   } 
