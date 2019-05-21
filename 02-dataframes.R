@@ -144,3 +144,13 @@ dforecast
 # 
 # Representar graficamente os dados originais e previstos
 # 
+dforecast <- dforecast %>% 
+  # mutate(index = format(index, "%Y-%m")) %>% 
+  mutate(index = zoo::as.yearmon(index))
+
+hchart(data, "line", hcaes(x = index, y = value), 
+       showInLegend = TRUE, name = "dados origanales") %>% 
+  hc_add_series(dforecast, "line", hcaes(x = index, y = pointforecast), 
+                showInLegend = TRUE, name = "predichos") %>% 
+  hc_add_series(dforecast, "arearange", hcaes(x = index, low = lo80, high = hi80), 
+                showInLegend = TRUE, name = "miuto legal")
